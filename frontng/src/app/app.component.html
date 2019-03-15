@@ -1,17 +1,60 @@
+<div class="image">
+    </div>
 <div class="container">
-  <h1>
-     {{title}}
-  </h1>
-  <hr />
-    <form (ngSubmit)="onSubmit(fm)" #fm="ngForm">
-      <div class="form-group">
-        <label for="name">Nom du produit:</label>
-        <input type="text" class="form-control" ngModel name="name">
-      </div>
-      <div class="form-group">
-        <label for="price">Prix:</label>
-        <input type="text" class="form-control" ngModel name="price">
-      </div>
-      <button type="submit" class="btn btn-primary">Add</button>
-    </form>
+    <div class="row">
+        <div class="col-md-8">
+
+            <h1>{{title}}</h1>
+
+            <!-- Table to output data -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>  </th>
+                        <th>PRODUCT</th>
+                        <th>PRICE</th>
+                        <th>  </th>
+                        <th>OPTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.sku }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>
+                            <button (click)="deleteProduct(product.id)" class="btn btn-danger">Delete</button>
+                            <button (click)="showProduct(product.id)" class="btn btn-primary">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+
+            <!-- Form to add data -->
+            <form [formGroup]="productForm" (ngSubmit)="storeProduct(productForm)">
+                <div class="form-group">
+                    <label for="quantity">ID Produit</label>
+                    <input type="number" class="form-control" name="quantity" min="1" max="10" placeholder="Autoincrément :)">
+                </div>
+              <div class="form-group">
+                    <label for="name">Nom Produit</label>
+                    <input type="text" class="form-control" name="name" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix</label>
+                    <input type="number" class="form-control" name="price" min="0" max="99999" step=".01" formControlName="price">
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            
+                <button type="button" (click)="putProduct(product.id)" class="btn btn-primary">Update</button>
+
+            </form>
+
+        </div>    
+    </div>
 </div>

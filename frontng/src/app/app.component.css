@@ -1,0 +1,9 @@
+.image{
+   
+    height:200px; background-size:400; width:auto;
+     background-image:url('../app/style/téléchargement.png'),url('../app/style/au2.jpg'),url('../app/style/au3.jpg');
+     background-repeat: no-repeat,no-repeat;
+     background-position: 50%;
+
+    
+  }
